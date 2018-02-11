@@ -34,7 +34,7 @@ The URL you need to use should be similar to: **http://yourhostorIP:8123/local/t
 <br>Home Assistant will use Webhooks to send data to a Google sheet via IFTTT. An automation will trigger this.
 * Create an applet in IFTTT to transfer the data from HASS to Google Sheets.
 <br>**this** (trigger) should be Webhooks with the event name **LatLong**
-<br> *that** (action service) should be Google Sheets, with the action "Add row to spreadsheet"; You can choose your own spreadsheet name and drive folder path (remember both), however the **formatted row** should be `{{OccurredAt}} ||| {{Value1}} |||{{Value2}} ||| {{Value3}}`
+<br> **that** (action service) should be Google Sheets, with the action "Add row to spreadsheet"; you can choose your own spreadsheet name and drive folder path (remember both), however the **formatted row** should be `{{OccurredAt}} ||| {{Value1}} |||{{Value2}} ||| {{Value3}}`
 * Create a new automation in HASS (when the state of your tracked device changes send data to Google sheets via IFTTT). You can enrich the automation as you wish.
 ```yaml
  - alias: Store Location GoogleDrive
@@ -67,4 +67,3 @@ The URL you need to use should be similar to: **http://yourhostorIP:8123/local/t
 Version 20180211:
 Start.
 ```
-
