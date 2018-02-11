@@ -26,9 +26,8 @@ LIMITATIONS: Can display more devices at the same time, but will use the same co
 <br>(create the folder structure if you don't have it - mind the permissions)
 * Get an API key for Google Maps. Edit the `/www/trackermap.html` file: replace `*YOURAPIKEY*` with your API key.
 <br> [*Get an API key from Google here*](https://developers.google.com/maps/documentation/javascript/get-api-key)
-* Download `/www/js/d3.v4.min.js` to `<your-hass-configuration-dir>/www/js`
+* Download `/www/js/d3.v4.min.js` to `<your-hass-configuration-dir>/www/js` if you plan to host the script yourself. For this use `<script src="js/d3.v4.min.js"></script>`. By default I am using the hosted version from [*D3.js*](https://d3js.org))
 <br>I am using this to read and filter the CSV file from Google Drive.
-<br>(you can also use the hosted version from [*D3.js*](https://d3js.org))
 * Download `/www/pin.png` to `<your-hass-configuration-dir>/www/` 
 <br>This will be your marker. [Flaticon](https://www.flaticon.com/) is a great place to get new markers. 
 <br>You can also use an URL for this. In the html replace `pin.png` with a URL pointing to your (preferably png) marker in your code.
