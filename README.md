@@ -21,7 +21,7 @@ KNOWN PROBLEMS: the code is a bit of a mess - could use a cleanup. <br>I can't s
 
 LIMITATIONS: Can display more devices at the same time, but will use the same color.
 ***
-## Installation (a bit complicated :)).
+## Installation - a bit complicated :)
 * Download `/www/trackermap.html` to `<your-hass-configuration-dir>/www/` 
 <br>(create the folder structure if you don't have it - mind the permissions)
 * Get an API key for Google Maps. Edit the `/www/trackermap.html` file: replace `*YOURAPIKEY*` with your API key.
