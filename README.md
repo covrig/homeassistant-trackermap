@@ -17,7 +17,7 @@ Tracking and mapping a device using Home Assistant, Google Sheets, Google Maps A
 * Can be used as a [*panel iframe*](https://home-assistant.io/components/panel_iframe) or as a [*custom state card iframe*](https://github.com/covrig/homeassistant-iframe-card);
 * Disabled more-info card.
 ***
-KNOWN PROBLEMS: the code is a bit of a mess - could use a cleanup. <br>I can't show all features in a picture (confidentiality issues). <br> I am aware, that all this could be done a lot easier with a small python script and a local file. I prepared this as a small training project.
+KNOWN PROBLEMS: the code is a bit of a mess - could use a cleanup. <br>I can't show all features in a picture (confidentiality issues). <br> I am aware, that all this could be done a lot easier with a small python script and a local file. I prepared this as a small training project that goes through a lot of elements.
 
 LIMITATIONS: Can display more devices at the same time, but will use the same color.
 ***
@@ -35,7 +35,7 @@ The URL you need to use should be similar to: **http://yourhostorIP:8123/local/t
 * Create an applet in IFTTT to transfer the data from HASS to Google Sheets.
 <br>**this** (trigger) should be Webhooks with the event name **LatLong**
 <br> **that** (action service) should be Google Sheets, with the action "Add row to spreadsheet"; you can choose your own spreadsheet name and drive folder path (remember both), however the **formatted row** should be `{{OccurredAt}} ||| {{Value1}} |||{{Value2}} ||| {{Value3}}`
-* Create a new automation in HASS (when the state of your tracked device changes send data to Google sheets via IFTTT). You can enrich the automation as you wish.
+* Create a new automation in HASS (when the state of your tracked device changes send data to Google sheets via IFTTT). You can enrich the automation as you wish (e.g. don't send data over the night).
 ```yaml
  - alias: Store Location GoogleDrive
    trigger:
@@ -48,7 +48,8 @@ The URL you need to use should be similar to: **http://yourhostorIP:8123/local/t
 * At this point you can restart HASS. If the automation wasn't triggered already, trigger it manually.
 * Check you Google Drive. After triggering the automation you should find your new Google Sheets file in the folder you specified. You can also search of it (the name you specified in IFTTT).
 * Replace the first row of the file with the headers below. You can write over the existing data.
-             <img src="https://i.imgur.com/qFc3lw5.jpg" width="450">
+  <img src="https://i.imgur.com/qFc3lw5.jpg" width="450">
+* Something to consider. The *Date* rows should be in the format *2018-02-11* (the order might be different depending on your locale). If you see just a number in the column change its format to match (*[see here how](https://i.imgur.com/d8SpBFf.png)*).
 * Publish the file as CSV: `File/Publish to thw web` -> `Sheet1` -> `CSV`. In the `Published content and & settings` (drop down, same screen) you should have the `Automatically republish when changes are made` checked.
 <br> This will allow Home Assistant to read your file. *Copy the link.*
 * Paste the link you copied above in your `/www/trackermap.html` file. Replace `MyGoogleSheetLink` with your link.<br>(`var URL = 'MyGoogleSheetLink';`)
