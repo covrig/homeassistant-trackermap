@@ -1,5 +1,5 @@
 # Tracker map for [Home Assistant](https://home-assistant.io)
-Tracking and mapping a device using Home Assistant, Google Sheets, Google Maps Api, and IFTTT
+Tracking and mapping a device using Home Assistant, Google Sheets, Google Maps Api, and IFTTT. <br>Similar to [Google Maps Timeline feature](https://www.google.com/maps/timeline).
 ```diff
 + Displays the history of a Home Assistant device tracker on a Google map. Uses Google Sheets as data storage.
 ```
@@ -16,7 +16,6 @@ Tracking and mapping a device using Home Assistant, Google Sheets, Google Maps A
 * Code can be easily customized to add/remove features (e.g. add filter for multiple devices);
 * Can be used as a [*panel iframe*](https://home-assistant.io/components/panel_iframe) or as a [*custom state card iframe*](https://github.com/covrig/homeassistant-iframe-card);
 * Disabled more-info card.
-* Similar to [Google Maps Timeline feature](https://www.google.com/maps/timeline).
 ***
 KNOWN PROBLEMS: the code is a bit of a mess - could use a cleanup. <br>I can't show all features in a picture (confidentiality issues).
 
