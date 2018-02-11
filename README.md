@@ -58,7 +58,7 @@ The URL you need to use should be similar to: **http://yourhostorIP:8123/local/t
              <img src="https://i.imgur.com/qFc3lw5.jpg" width="450">
 * Publish the file as CSV: `File/Publish to thw web` -> `Sheet1` -> `CSV`. In the `Published content and & settings` (drop down, same screen) you should have the `Automatically republish when changes are made` checked.
 <br> This will allow Home Assistant to read your file. *Copy the link.*
-* Paste the link you copied above in your `/www/trackermap.html` file. Replace `MyGoogleSheetLink` with your link.
+* Paste the link you copied above in your `/www/trackermap.html` file. Replace `MyGoogleSheetLink` with your link. (`var URL = 'MyGoogleSheetLink';`)
 * All done! It might take a few minutes for HASS to register the points.<br> You might need to clear your browser cache or restart HASS.
 
 
