@@ -19,7 +19,7 @@ Tracking and mapping a device using Home Assistant, Google Sheets, Google Maps A
 ***
 KNOWN PROBLEMS: the code is a bit of a mess - could use a cleanup. <br>I can't show all features in a picture (confidentiality issues).
 
-LIMITATIONS: Can display more devices at the same time, but will use the same color. 
+LIMITATIONS: Can display more devices at the same time, but will use the same color.
 ***
 ## Installation (a bit complicated :)).
 * Download `/www/trackermap.html` to `<your-hass-configuration-dir>/www/` 
