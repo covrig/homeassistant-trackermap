@@ -1,6 +1,8 @@
 # Tracker map for [Home Assistant](https://home-assistant.io)
 Tracking and mapping a device using Home Assistant, Google Sheets, Google Maps Api, and IFTTT
-
+```diff
++ Displays the history of a device tracker from HASS on a Google map. Uses Google Sheets as data storage.
+```
 
 <img align="left" src="https://i.imgur.com/E6yZfuf.png" height="350">
 
