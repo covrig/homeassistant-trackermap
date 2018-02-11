@@ -24,7 +24,7 @@ LIMITATIONS: Can display more devices at the same time, but will use the same co
 ## Installation (a bit complicated :)).
 * Download `/www/trackermap.html` to `<your-hass-configuration-dir>/www/` 
 <br>(create the folder structure if you don't have it - mind the permissions)
-* Get an API key for Google Maps. Edit the html file: replace `*YOURAPI*` with your API key.
+* Get an API key for Google Maps. Edit the `/www/trackermap.html` file: replace `*YOURAPI*` with your API key.
 <br> [*Get an API key from Google here*](https://developers.google.com/maps/documentation/javascript/get-api-key)
 * Download `/www/js/d3.v4.min.js` to `<your-hass-configuration-dir>/www/js`
 <br>I am using this to read and filter the CSV file from Google Drive.
