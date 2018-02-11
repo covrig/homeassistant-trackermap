@@ -28,7 +28,7 @@ LIMITATIONS: Can display more devices at the same time, but will use the same co
 <br> [*Get an API key from Google here*](https://developers.google.com/maps/documentation/javascript/get-api-key)
 * Download `/www/js/d3.v4.min.js` to `<your-hass-configuration-dir>/www/js` if you plan to host the script yourself. For this use `<script src="js/d3.v4.min.js"></script>`. By default I am using the hosted version from [*D3.js*](https://d3js.org))
 <br>I am using this to read and filter the CSV file from Google Drive.
-* Download `/www/pin.png` to `<your-hass-configuration-dir>/www/` 
+* Download `/www/pin.png` to `<your-hass-configuration-dir>/www/`  if you plan to host the marker picture yourself.
 <br>This will be your marker. [Flaticon](https://www.flaticon.com/) is a great place to get new markers. 
 <br>You can also use an URL for this. In the html replace `pin.png` with a URL pointing to your (preferably png) marker in your code.
 
@@ -59,7 +59,7 @@ The URL you need to use should be similar to: **http://yourhostorIP:8123/local/t
 <br> This will allow Home Assistant to read your file. *Copy the link.*
 * Paste the link you copied above in your `/www/trackermap.html` file. Replace `MyGoogleSheetLink` with your link.<br>(`var URL = 'MyGoogleSheetLink';`)
 * All done! It might take a few minutes for HASS to register the points.<br> You might need to clear your browser cache or restart HASS.
-* If the map does not show in the frontend try to paste the code in [JSBIN](http://jsbin.com/?html,output).
+* If the map does not show in the frontend try to paste the html file contents to [JSBIN](http://jsbin.com/?html,output). If it works there your problem is with the HASS configuration.
 
 
 ## Changelog
