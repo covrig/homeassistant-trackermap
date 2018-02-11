@@ -118,9 +118,8 @@
 
     function addLatLng(event) {
 
-
         var URLMarker = document.getElementById("marker").value
-
+        //Replace here
         var URL = 'MyGoogleSheetLink';
 
         d3.csv(URL, function(error, data) {
@@ -133,7 +132,8 @@
             csv.forEach(function(d) {
 
                 var location = new google.maps.LatLng(d.Lat, d.Long);
-
+                //For debug uncomment the following line:
+                //console.log(d[0])
                 path.push(location);
                 heatmapData.push(location);
                 var marker = new google.maps.Marker({
@@ -159,6 +159,8 @@
         document.getElementById('date').valueAsDate = new Date();
         document.getElementById('date2').valueAsDate = new Date();
         clearInterval(myVar2);
+        var testdate =document.getElementById('date').value;
+        console.log(testdate)
     }
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOURAPIKEY&libraries=visualization&callback=initMap">
