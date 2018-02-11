@@ -17,7 +17,7 @@ Tracking and mapping a device using Home Assistant, Google Sheets, Google Maps A
 * Can be used as a [*panel iframe*](https://home-assistant.io/components/panel_iframe) or as a [*custom state card iframe*](https://github.com/covrig/homeassistant-iframe-card);
 * Disabled more-info card.
 ***
-KNOWN PROBLEMS: the code is a bit of a mess - could use a cleanup. <br>I can't show all features in a picture (confidentiality issues).
+KNOWN PROBLEMS: the code is a bit of a mess - could use a cleanup. <br>I can't show all features in a picture (confidentiality issues). What I am doing here could be done a lot easier with a small python script and a local file. I prepared this as a small training.
 
 LIMITATIONS: Can display more devices at the same time, but will use the same color.
 ***
@@ -55,7 +55,7 @@ The URL you need to use should be similar to: **http://yourhostorIP:8123/local/t
 * All done! It might take a few minutes for HASS to register the points.<br> You might need to clear your browser cache or restart HASS.
 * If the map does not show in the frontend try to paste the html file contents to [JSBIN](http://jsbin.com/?html,output). If it works there your problem is with the HASS configuration.
 
-## Additonal information + self hosting icon and scripts
+## Additional information + self hosting icon and d3.js script
 * Download `/www/js/d3.v4.min.js` to `<your-hass-configuration-dir>/www/js` if you plan to host the script yourself. For this use `<script src="js/d3.v4.min.js"></script>`. <br>By default I am using the hosted version from [*D3.js*](https://d3js.org).
 <br>I am using this to read and filter the CSV file from Google Drive.
 * Download `/www/pin.png` to `<your-hass-configuration-dir>/www/`  if you plan to host the marker picture yourself.
