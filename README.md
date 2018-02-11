@@ -2,8 +2,8 @@
 Tracking and mapping a device using Home Assistant, Google Sheets, Google Maps Api, and IFTTT
 ```diff
 + Displays the history of a Home Assistant device tracker on a Google map. Uses Google Sheets as data storage.
-+ Similar to [Google Maps Timeline feature](https://www.google.com/maps/timeline).
 ```
+Similar to [Google Maps Timeline feature](https://www.google.com/maps/timeline).
 
 <img align="left" src="https://i.imgur.com/E6yZfuf.png" height="350">
 
