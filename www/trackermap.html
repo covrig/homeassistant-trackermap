@@ -121,7 +121,7 @@
 
         var URLMarker = document.getElementById("marker").value
 
-        var URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQNMeBImcHdirQATlHASi75L0ovieBMbc_gr_E0ZZnO4We7Sn-m76BNCgkJhk262J2z9rANEpueBwEO/pub?gid=0&single=true&output=csv';
+        var URL = 'MyGoogleSheetLink';
 
         d3.csv(URL, function(error, data) {
             csv = data.filter(function(row) {
@@ -161,7 +161,7 @@
         clearInterval(myVar2);
     }
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXu3BoAwbEF8w27rTSIAs-l183ACb3v_M&libraries=visualization&callback=initMap">
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=YOURAPIKEY&libraries=visualization&callback=initMap">
 </script>
 <div id="floating-panel">
     <select id="marker" onChange="initMap(), addLatLng()">
