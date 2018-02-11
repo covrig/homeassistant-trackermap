@@ -17,7 +17,7 @@ Tracking and mapping a device using Home Assistant, Google Sheets, Google Maps A
 * Can be used as a [*panel iframe*](https://home-assistant.io/components/panel_iframe) or as a [*custom state card iframe*](https://github.com/covrig/homeassistant-iframe-card);
 * Disabled more-info card.
 ***
-KNOWN PROBLEMS: the code is a bit of a mess - could use a cleanup. <br>I can't show all features in a picture (confidentiality issues). What I am doing here could be done a lot easier with a small python script and a local file. I prepared this as a small training.
+KNOWN PROBLEMS: the code is a bit of a mess - could use a cleanup. <br>I can't show all features in a picture (confidentiality issues). <br> I am aware, that all this could be done a lot easier with a small python script and a local file. I prepared this as a small training project.
 
 LIMITATIONS: Can display more devices at the same time, but will use the same color.
 ***
