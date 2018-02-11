@@ -49,7 +49,7 @@ The URL you need to use should be similar to: **http://yourhostorIP:8123/local/t
 * Check you Google Drive. After triggering the automation you should find your new Google Sheets file in the folder you specified. You can also search of it (the name you specified in IFTTT).
 * Replace the first row of the file with the headers below. You can write over the existing data.
   <img src="https://i.imgur.com/qFc3lw5.jpg" width="450">
-* Something to consider. The *Date* rows should be in the format *2018-02-11* (the order might be different depending on your locale). If you see just a number in the column change its format to match (*[see here how](https://i.imgur.com/d8SpBFf.png)*). To check your date format open the developer console (F12) and press the "Today" button.
+* Something to consider. The *Date* rows should be in the format *2018-02-11* (the order might be different depending on your locale). If you see just a number in the column change its format to match (*[see here how](https://i.imgur.com/d8SpBFf.png)*). To check your date format open the developer console (F12) on the tab the map is running and press the "Today" button on the map.
 * Publish the file as CSV: `File/Publish to thw web` -> `Sheet1` -> `CSV`. In the `Published content and & settings` (drop down, same screen) you should have the `Automatically republish when changes are made` checked.
 <br> This will allow Home Assistant to read your file. *Copy the link.*
 * Paste the link you copied above in your `/www/trackermap.html` file. Replace `MyGoogleSheetLink` with your link.<br>(`var URL = 'MyGoogleSheetLink';`)
