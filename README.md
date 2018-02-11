@@ -59,6 +59,7 @@ The URL you need to use should be similar to: **http://yourhostorIP:8123/local/t
 <br> This will allow Home Assistant to read your file. *Copy the link.*
 * Paste the link you copied above in your `/www/trackermap.html` file. Replace `MyGoogleSheetLink` with your link.<br>(`var URL = 'MyGoogleSheetLink';`)
 * All done! It might take a few minutes for HASS to register the points.<br> You might need to clear your browser cache or restart HASS.
+* If the map does not show in the frontend try to paste the code in [JSBIN](http://jsbin.com/?html,output).
 
 
 ## Changelog
