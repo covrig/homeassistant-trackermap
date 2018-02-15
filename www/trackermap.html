@@ -156,8 +156,10 @@
         var path = poly.getPath();
     }
     function today() {
-        document.getElementById('date').valueAsDate = new Date();
-        document.getElementById('date2').valueAsDate = new Date();
+        var nd = new Date();
+        var ndoff = new Date (+nd-nd.getTimezoneOffset()*60000);
+        document.getElementById('date').valueAsDate = ndoff;
+        document.getElementById('date2').valueAsDate = ndoff;
         clearInterval(myVar2);
         var testdate =document.getElementById('date').value;
         console.log(testdate)
@@ -170,7 +172,7 @@
     <option selected disabled value="https://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png">Markers</option>
     <option value="https://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png">Yes</option>
     <option value="0">No</option>
-</select>
+    </select>
         <button onclick="toggleHeatmap()">Toggle Heatmap</button></br>
         <button onclick="changeupRadius()">▲ Radius</button>
         <button onclick="changedownRadius()">▼ Radius</button>
