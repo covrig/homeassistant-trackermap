@@ -47,7 +47,7 @@ The URL you need to use should be similar to: **http://yourhostorIP:8123/local/t
 ```
 * At this point you can restart HASS. If the automation wasn't triggered already, trigger it manually.
 * Check you Google Drive. After triggering the automation you should find your new Google Sheets file in the folder you specified. You can also search it by name (the name you specified in IFTTT). Do not add anything to it. Let's say the name of this sheet is "Source" (proceed to next bullet).
-* Now for some reason there is a 2000 row/per sheet IFTTT limit (the 2001 data point creates a new sheet). <br>To solve this, create a new Google Sheet file in the same folder (better keep both in the same folder). Let's say the name of this sheet is "Archive".
+* For some reason there is a 2000 row/per sheet IFTTT limit (the 2001 data point creates a new sheet). <br>To solve this, create a new Google Sheet file in the same folder (better keep both in the same folder). Let's say the name of this sheet is "Archive".
 * Open the "Source" file and go to `Tools\Script Editor`. Replace everything with the following function that moves the data from "Source" to "Archive" (each sheet Id can be found in the URL e.g. `1ytJkkDIs7alHLcAbDwhnRoul-ltFiof6JvhORxgEdWc`).
 ```javascript
 function onChange(event) {
@@ -83,7 +83,7 @@ function onChange(event) {
 <br>In the html replace `https://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png` (2 locations) with `pin.png` (or any other name you choose).
 
 ## Changelog
-```
-Version 20180211:
-Start.
+```diff
+Version 20180215:
++Added extra information on how to bypass the 2000 rows per Google Sheet IFTTT limit.
 ```
