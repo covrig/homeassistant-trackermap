@@ -85,5 +85,6 @@ function onChange(event) {
 ## Changelog
 ```diff
 Version 20180215:
-+Added extra information on how to bypass the 2000 rows per Google Sheet IFTTT limit.
++Added extra information on how to bypass the 2000 rows per Google Sheet IFTTT limit;
++Fixed time zone problem;
 ```
