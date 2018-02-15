@@ -46,12 +46,31 @@ The URL you need to use should be similar to: **http://yourhostorIP:8123/local/t
       data_template: {"event": "LatLong", "value1": "{{now().year}}-{{now().strftime('%m')}}-{{now().strftime('%d')}}", "value2": "{{ states.device_tracker['88888888888'].attributes.latitude }}", "value3": "{{ states.device_tracker['88888888888'].attributes.longitude }}"}
 ```
 * At this point you can restart HASS. If the automation wasn't triggered already, trigger it manually.
-* Check you Google Drive. After triggering the automation you should find your new Google Sheets file in the folder you specified. You can also search of it (the name you specified in IFTTT).
+* Check you Google Drive. After triggering the automation you should find your new Google Sheets file in the folder you specified. You can also search it by name (the name you specified in IFTTT). Do not add anything to it. Let's say the name of this sheet is "Source" (proceed to next bullet).
+* Now for some reason there is a 2000 row/per sheet IFTTT limit (the 2001 data point creates a new sheet). <br>To solve this, create a new Google Sheet file in the same folder (better keep both in the same folder). Let's say the name of this sheet is "Archive".
+* Open the "Source" file and go to `Tools\Script Editor`. Replace everything with the following function that moves the data from "Source" to "Archive" (each sheet Id can be found in the URL e.g. 1ytJkkDIs7alHLcAbDwhnRoul-ltFiof6JvhORxgEdWc).
+```
+function onChange(event) {
+
+  var source = SpreadsheetApp.openById('IdOfSource');
+  var archive = SpreadsheetApp.openById('IdOfArchive');
+  
+  var sourceSheet = source.getSheetByName('Sheet1');
+  var destSheet = archive.getSheetByName('Sheet1');    
+  var sourceData = sourceSheet.getRange('A1:D1').getValues();  
+  
+  destSheet.getRange(destSheet.getLastRow()+1,1,sourceData.length,sourceData[0].length).setValues(sourceData);   
+  sourceSheet.getRange(1, 1, sourceSheet.getLastRow(), sourceSheet.getLastColumn()).clear({contentsOnly: true}); 
+}
+
+```
+* Create a trigger for the function above. In the script editor go to `Edit\Current project's trigger`, give the script a name, then click on the link pointing you to create a new trigger. Select the `onChange` function and change from time based (you can also use time) to `From spreadsheet + On Change`.
+* Save evertyhing. You will be asked to authorize your scropt with your account. Proceed to do that.
 * Replace the first row of the file with the headers below. You can write over the existing data.
   <img src="https://i.imgur.com/qFc3lw5.jpg" width="450">
 * Something to consider. The *Date* rows should be in the format *2018-02-11* (the order might be different depending on your locale). If you see just a number in the column change its format to match (*[see here how](https://i.imgur.com/d8SpBFf.png)*). To check your date format open the developer console (F12) on the tab the map is running and press the "Today" button on the map.
-* Publish the file as CSV: `File/Publish to thw web` -> `Sheet1` -> `CSV`. In the `Published content and & settings` (drop down, same screen) you should have the `Automatically republish when changes are made` checked.
-<br> This will allow Home Assistant to read your file. *Copy the link.*
+* Publish the "Archive" file as CSV: `File/Publish to thw web` -> `Sheet1` -> `CSV`. In the `Published content and & settings` (drop down, same screen) you should have the `Automatically republish when changes are made` checked.
+<br> This will allow Home Assistant to read your file. *Copy the Archive file link.*
 * Paste the link you copied above in your `/www/trackermap.html` file. Replace `MyGoogleSheetLink` with your link.<br>(`var URL = 'MyGoogleSheetLink';`)
 * **All done!** It might take a few minutes for HASS to register the points.<br> You might need to clear your browser cache or restart HASS.
 * If the map does not show in the frontend try to paste the html file contents to [JSBIN](http://jsbin.com/?html,output). If it works there your problem is with the HASS configuration.
