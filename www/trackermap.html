@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- v.20180215-->
+<!-- v.20180216-->
 <html>
 <head>
 <meta charset="UTF-8">
@@ -47,6 +47,11 @@
             zoom: 5,
             gestureHandling: 'greedy',
             disableDefaultUI: true,
+            mapTypeControl: true,
+            mapTypeControlOptions: {
+                 style: google.maps.MapTypeControlStyle.DEFAULT,
+                 position: google.maps.ControlPosition.TOP_LEFT
+            },
             center: {
                 lat: 40,
                 lng: 0
@@ -162,8 +167,16 @@
         document.getElementById('date').valueAsDate = ndoff;
         document.getElementById('date2').valueAsDate = ndoff;
         clearInterval(myVar2);
-        var testdate =document.getElementById('date').value;
+        var testdate = document.getElementById('date').value;
         console.log(testdate)
+    }
+    function min1() {
+        var dd = document.getElementById('date').value;
+        var nd = new Date(dd);
+        nd.setDate(nd.getDate() - 1);
+        var ndoff = new Date (+nd-nd.getTimezoneOffset()*60000);
+        document.getElementById('date').valueAsDate = ndoff;
+        document.getElementById('date2').valueAsDate = ndoff;
     }
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOURAPIKEY&libraries=visualization&callback=initMap">
@@ -184,6 +197,7 @@
     <br>
     <input id="date" type="date" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" title="yyyy-mm-dd" onChange="initMap(), addLatLng()">
     <input id="date2" type="date" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" title="yyyy-mm-dd" onChange="initMap(), addLatLng()">
-    <input type="button" value="Today" onClick="today(),initMap(), addLatLng()"></div>
+    <input type="button" value="Today" onClick="today(),initMap(), addLatLng()">
+    <input type="button" value="-1D" onClick="min1(),initMap(), addLatLng()"></div>
 <div id="map"></div>
 </html>
