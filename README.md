@@ -88,4 +88,7 @@ Version 20180215:
 +Added extra information on how to bypass the 2000 rows per Google Sheet IFTTT limit;
 +Fixed time zone problem;
 +The date input is not compatible with all browsers. In some cases in defaults to text. Added required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" to help with this.
+Version 20180216:
++Added "1D" - go back one day button;
++Enabled layers: sattelite, terrain etc.
 ```
