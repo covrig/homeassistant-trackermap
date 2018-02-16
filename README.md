@@ -48,7 +48,7 @@ The URL you need to use should be similar to: **http://yourhostorIP:8123/local/t
 * At this point you can restart HASS. If the automation wasn't triggered already, trigger it manually.
 * Check you Google Drive. After triggering the automation you should find your new Google Sheets file in the folder you specified. You can also search it by name (the name you specified in IFTTT). Do not add anything to it. Let's say the name of this sheet is "Source" (proceed to next bullet).
 * For some reason there is a 2000 row/per sheet IFTTT limit (the 2001 data point creates a new sheet). <br>To solve this, create a new Google Sheet file in the same folder (better keep both in the same folder). Let's say the name of this sheet is "Archive".
-* Open the "Source" file and go to `Tools\Script Editor`. Replace everything with the following function that moves the data from "Source" to "Archive" (each sheet Id can be found in the URL e.g. `1ytJkkDIs7alHLcAbDwhnRoul-ltFiof6JvhORxgEdWc`).
+* Open the "Source" file and go to `Tools\Script Editor`. Replace everything with the following function that moves the data from "Source" to "Archive" (update the Ids in the function - each sheet Id can be found in the URL e.g. `1ytJkkDIs7alHLcAbDwhnRoul-ltFiof6JvhORxgEdWc`).
 ```javascript
 function onChange(event) {
 
@@ -62,10 +62,9 @@ function onChange(event) {
   destSheet.getRange(destSheet.getLastRow()+1,1,sourceData.length,sourceData[0].length).setValues(sourceData);   
   sourceSheet.getRange(1, 1, sourceSheet.getLastRow(), sourceSheet.getLastColumn()).clear({contentsOnly: true}); 
 }
-
 ```
 * Create a trigger for the function above. In the script editor go to `Edit\Current project's trigger`, give the script a name, then click on the link pointing you to create a new trigger. Select the `onChange` function and change from time based (you can also use time) to `From spreadsheet + On Change`.
-* Save evertyhing. You will be asked to authorize your scropt with your account. Proceed to do that.
+* Save evertyhing. You will be asked to authorize your script with your account. Proceed to do that.
 * Replace the first row of the Archive file with the headers below. You can write over the existing data.
   <img src="https://i.imgur.com/qFc3lw5.jpg" width="450">
 * Something to consider. The *Date* rows should be in the format *2018-02-11* (the order might be different depending on your locale). If you see just a number in the column change its format to match (*[see here how](https://i.imgur.com/d8SpBFf.png)*). To check your date format open the developer console (F12) on the tab the map is running and press the "Today" button on the map.
