@@ -13,6 +13,7 @@ Tracking and mapping ***one or more*** devices using Home Assistant, Google Shee
 * Markers: on/off;
 * Polylines: on/off;
 * Heatmap: +/- radius, +/- intensity, opacity, gradient color;
+* Distance traveled;
 * Code can be easily customized to add/remove features (e.g. add filter for multiple devices);
 * Can be used as a [*panel iframe*](https://home-assistant.io/components/panel_iframe), [*custom state card iframe*](https://github.com/covrig/homeassistant-iframe-card) or outside HASS (CORS might be a problem to solve);
 * Disabled more-info card, auto resize/recenter map...
@@ -115,5 +116,7 @@ Version 20180215:
 Version 20180216:
 +Added "-1D" - go back one day button: every click substracts a day;
 +Enabled layers: sattelite, terrain etc.
+Version 20180217:
++Added distance traveled.
 -Added trackermap_multipledevices.html
 ```
