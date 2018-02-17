@@ -87,10 +87,10 @@ function onChange(event) {
 * The column names of the Google Sheet file should be updated to: `Title\Device\Date\Lat\Long` (`Device` is new).
 * For each tracked device a different HASS automation should be created. Same format as explained above. The difference is in the `data_template`. The `event` parameter should contain the device name.
 ```
-autmation1:
+automation1:
 ...
 data_template: {"event": "DeviceName1", "value1":...
-autmation2:
+automation2:
 ...
 data_template: {"event": "DeviceName2", "value1":...
 ```
@@ -105,7 +105,7 @@ csv = data.filter...row['Device'] === "John" );
 csv2 = data.filter...row['Device'] === "Mary" );
 ```
 * The `trackermap_multipledevices.html` file explains how to add more than 2 devices (in comments).
-
+<img src="https://i.imgur.com/Arg6nPq.jpg" height="350">
 
 ## Changelog
 ```diff
