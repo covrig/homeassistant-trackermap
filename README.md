@@ -83,16 +83,16 @@ function onChange(event) {
 
 ## Tracking multiple devices
 * The steps are more or less the same as above. Use `/www/trackermap_multipledevices.html` instead.
-* The URL you need to use should be similar to: **http://yourhostorIP:8123/local/trackermap_multipledevices.html**.
+* The URL you need to use for your iframe should be similar to: **http://yourhostorIP:8123/local/trackermap_multipledevices.html**.
 * The IFTTT **that** - **formatted row**section should be updated to: `{{OccurredAt}} ||| {{EventName}} ||| {{Value1}} |||{{Value2}} ||| {{Value3}}`. The difference is the `{{EventName}}`.
 * The column names of the Google Sheet file should be updated to: `Title\Device\Date\Lat\Long` (`Device` is new).
 * For each tracked device a different HASS automation should be created. Same format as explained above. The difference is in the `data_template`. The `event` parameter should contain the device name.
 ```
 automation1:...
-data_template: {"event": "DeviceName1", "value1":...
+data_template: {"event": "DeviceName1: John", "value1":...
 
 automation2:...
-data_template: {"event": "DeviceName2", "value1":...
+data_template: {"event": "DeviceName2: Mary", "value1":...
 ```
 * Edit the `trackermap_multipledevices.html` to match names of your devices/events (read the comments in the file):
 ```
