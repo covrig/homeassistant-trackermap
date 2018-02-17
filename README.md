@@ -6,8 +6,6 @@ Tracking and mapping ***one or more*** devices using Home Assistant, Google Shee
 
 <img align="left" src="https://i.imgur.com/E6yZfuf.png" height="350">
 
-***
-
 ## Features
 * Date filters: day, period;
 * One or more devices in the same time [read here](https://github.com/covrig/homeassistant-trackermap/blob/master/README.md#tracking-multiple-devices);
