@@ -102,7 +102,7 @@ csv = data.filter...row['Device'] === "John" );
 csv2 = data.filter...row['Device'] === "Mary" );
 ```
 * The `trackermap_multipledevices.html` file explains how to add more than 2 devices (in comments).
-* Don't forget about inserting your Google Sheet URL.
+* Don't forget about inserting your Google Sheet URL and the API key.
 <img src="https://i.imgur.com/Arg6nPq.jpg" height="250">
 
 ## Changelog
