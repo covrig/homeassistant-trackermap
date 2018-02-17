@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- v.20180216-->
+<!-- v.20180217-->
 <html>
 <head>
 <meta charset="UTF-8">
@@ -40,6 +40,11 @@
     ::-webkit-datetime-edit-day-field {
         color: red;
     }
+#dist {
+    color: red;
+    font-size: 0.8em;
+    margin-left: 5px;
+   }
 </style>
 <script>
     function initMap() {
@@ -158,6 +163,12 @@
                     this.infowindow.open(map, this);
                 });
             });
+            var distraw = 0;
+            for (var i = 0; i < path.getLength() - 1; i++) {
+               distraw += google.maps.geometry.spherical.computeDistanceBetween(path.getAt(i), path.getAt(i + 1));
+            }
+            var dist =  (distraw / 1000).toFixed(1)   
+            document.getElementById("dist").innerHTML = "Distance: " + dist + " km";   
         });
         clearInterval(myVar);
         var path = poly.getPath();
@@ -169,7 +180,7 @@
         document.getElementById('date2').valueAsDate = ndoff;
         clearInterval(myVar2);
         var testdate = document.getElementById('date').value;
-        console.log(testdate  + "v.20180216")
+        console.log(testdate  + "v.20180217")
     }
     function min1() {
         var dd = document.getElementById('date').value;
@@ -180,7 +191,7 @@
         document.getElementById('date2').valueAsDate = ndoff;
     }
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=YOURAPIKEY&libraries=visualization&callback=initMap">
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=YOURAPIKEY&libraries=visualization,geometry&callback=initMap">
 </script>
 <div id="floating-panel">
     <select id="marker" onChange="initMap(), addLatLng()">
@@ -188,7 +199,8 @@
     <option value="https://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png">Yes</option>
     <option value="0">No</option>
     </select>
-        <button onclick="toggleHeatmap()">Toggle Heatmap</button></br>
+        <button onclick="toggleHeatmap()">Toggle Heatmap</button>
+        <span id="dist"></span></br>
         <button onclick="changeupRadius()">▲ Radius</button>
         <button onclick="changedownRadius()">▼ Radius</button>
         <button onclick="changeupInt()">▲ Int</button>
