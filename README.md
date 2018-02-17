@@ -1,5 +1,5 @@
 # Tracker map for [Home Assistant](https://home-assistant.io)
-Tracking and mapping a device using Home Assistant, Google Sheets, Google Maps Api, and IFTTT. <br>Similar to [Google Maps Timeline feature](https://www.google.com/maps/timeline).
+Tracking and mapping one or more devices using Home Assistant, Google Sheets, Google Maps Api, and IFTTT. <br>Similar to [Google Maps Timeline feature](https://www.google.com/maps/timeline).
 ```diff
 + Displays the history of a Home Assistant device tracker on a Google map. Uses Google Sheets as data storage.
 ```
@@ -81,6 +81,33 @@ function onChange(event) {
 <br>This will be your marker. [Flaticon](https://www.flaticon.com/) is a great place to get new markers. 
 <br>In the html replace `https://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png` (2 locations) with `pin.png` (or any other name you choose).
 
+## Tracking multiple devices
+<img align="left" src="https://i.imgur.com/Arg6nPq.jpg" height="350">
+* Use the same steps as before.
+* The IFTTT **that** section should be updated to: `{{OccurredAt}} ||| {{EventName}} ||| {{Value1}} |||{{Value2}} ||| {{Value3}}`. The difference is the `{{EventName}}`.
+* The column names of the Google Sheet file should be updated to: `Title\Device\Date\Lat\Long` (`Device` is new).
+* For each tracked device a different HASS automation should be created. Same format as explained above. The difference is in the `data_template`. The `event` parameter should contain the device name.
+```
+autmation1:
+...
+data_template: {"event": "DeviceName1", "value1":...
+autmation2:
+...
+data_template: {"event": "DeviceName2", "value1":...
+```
+* Edit the `trackermap_multipledevices.html` to match names of your devices (read de comments there):
+```
+    <option value="Mary">Mary</option>
+    <option value="John">John</option>
+```
+**and**
+```
+csv = data.filter...row['Device'] === "John" );
+csv2 = data.filter...row['Device'] === "Mary" );
+```
+* The `trackermap_multipledevices.html` file explains how to add more than 2 devices (in comments).
+
+
 ## Changelog
 ```diff
 Version 20180215:
@@ -90,4 +117,5 @@ Version 20180215:
 Version 20180216:
 +Added "-1D" - go back one day button: every click substracts a day;
 +Enabled layers: sattelite, terrain etc.
+Added trackermap_multipledevices.html
 ```
