@@ -17,7 +17,7 @@ Tracking and mapping ***one or more*** devices using Home Assistant, Google Shee
 * Can be used as a [*panel iframe*](https://home-assistant.io/components/panel_iframe) or as a [*custom state card iframe*](https://github.com/covrig/homeassistant-iframe-card);
 * Disabled more-info card, auto resize/recenter map...
 ***
-KNOWN PROBLEMS: <br>Browser compatibility issues: the date picker could default to a text picker. <br>I can't show all features in a picture (confidentiality issues). <br> I am aware, that all this could be done a lot easier with a small python script and a local file. I prepared this as a small training project that goes through a lot of elements.
+KNOWN PROBLEMS: <br>[Browser compatibility issues](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date#Browser_compatibility): the date picker could default to a text picker. <br>I can't show all features in a picture (confidentiality issues). <br> I am aware, that all this could be done a lot easier with a small python script and a local file. I prepared this as a small training project that goes through a lot of elements.
 ***
 ## Installation - a bit complicated :)
 * Download `/www/trackermap.html` to `<your-hass-configuration-dir>/www/` 
@@ -81,7 +81,7 @@ function onChange(event) {
 <br>In the html replace `https://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png` (2 locations) with `pin.png` (or any other name you choose).
 
 ## Tracking multiple devices
-* Use the same steps as before.
+* The steps are more or less the same as above. Use `/www/trackermap_multipledevices.html` instead.
 * The IFTTT **that** section should be updated to: `{{OccurredAt}} ||| {{EventName}} ||| {{Value1}} |||{{Value2}} ||| {{Value3}}`. The difference is the `{{EventName}}`.
 * The column names of the Google Sheet file should be updated to: `Title\Device\Date\Lat\Long` (`Device` is new).
 * For each tracked device a different HASS automation should be created. Same format as explained above. The difference is in the `data_template`. The `event` parameter should contain the device name.
@@ -92,7 +92,7 @@ data_template: {"event": "DeviceName1", "value1":...
 automation2:...
 data_template: {"event": "DeviceName2", "value1":...
 ```
-* Edit the `trackermap_multipledevices.html` to match names of your devices (read de comments there):
+* Edit the `trackermap_multipledevices.html` to match names of your devices/events (read de comments in the file):
 ```
 <option value="Mary">Mary</option>
 <option value="John">John</option>
@@ -110,7 +110,7 @@ csv2 = data.filter...row['Device'] === "Mary" );
 Version 20180215:
 +Added extra information on how to bypass the 2000 rows per Google Sheet IFTTT limit;
 +Fixed time zone problem;
-+The date input is not compatible with all browsers. In some cases in defaults to text. Added required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" to help with this.
++The date input is not compatible with all browsers. In some cases it defaults to text. Added required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" to help with this.
 Version 20180216:
 +Added "-1D" - go back one day button: every click substracts a day;
 +Enabled layers: sattelite, terrain etc.
