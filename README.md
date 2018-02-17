@@ -97,7 +97,6 @@ data_template: {"event": "DeviceName2", "value1":...
 <option value="Mary">Mary</option>
 <option value="John">John</option>
 ```
-**and**
 ```
 csv = data.filter...row['Device'] === "John" );
 csv2 = data.filter...row['Device'] === "Mary" );
