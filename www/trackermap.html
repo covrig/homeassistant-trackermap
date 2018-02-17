@@ -22,12 +22,13 @@
     #date2 {
         background-color: #ffecb3;
         margin-top: 3px;
+        border: 1px solid grey;
     }
 
     #floating-panel {
         position: relative;
         left: 0px;
-        padding: 0px;
+        padding: 1px;
         border-bottom: 1px solid #999;
         text-align: center;
         font-family: 'Roboto', 'sans-serif';
@@ -81,19 +82,19 @@
     } 
 
     function changeupRadius() {
-        heatmap.set('radius', heatmap.get('radius') * 1.1);
+        heatmap.set('radius', heatmap.get('radius') * 1.2);
     }
 
     function changedownRadius() {
-        heatmap.set('radius', heatmap.get('radius') / 1.1);
+        heatmap.set('radius', heatmap.get('radius') / 1.2);
     }
 
     function changeupInt() {
-        heatmap.set('maxIntensity', heatmap.get('maxIntensity') / 1.1);
+        heatmap.set('maxIntensity', heatmap.get('maxIntensity') / 1.2);
     }
 
     function changedownInt() {
-        heatmap.set('maxIntensity', heatmap.get('maxIntensity') * 1.1);
+        heatmap.set('maxIntensity', heatmap.get('maxIntensity') * 1.2);
     }
 
     function changeOpacity() {
@@ -134,7 +135,7 @@
             });
 
             var bounds = new google.maps.LatLngBounds();
-            var location2 = [];
+           
             csv.forEach(function(d) {
 
                 var location = new google.maps.LatLng(d.Lat, d.Long);
@@ -168,7 +169,7 @@
         document.getElementById('date2').valueAsDate = ndoff;
         clearInterval(myVar2);
         var testdate = document.getElementById('date').value;
-        console.log(testdate)
+        console.log(testdate  + "v.20180216")
     }
     function min1() {
         var dd = document.getElementById('date').value;
