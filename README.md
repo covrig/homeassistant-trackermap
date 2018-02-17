@@ -18,8 +18,6 @@ Tracking and mapping ***one or more*** devices using Home Assistant, Google Shee
 * Disabled more-info card, auto resize/recenter map...
 ***
 KNOWN PROBLEMS: <br>Browser compatibility issues: the date picker could default to a text picker. <br>I can't show all features in a picture (confidentiality issues). <br> I am aware, that all this could be done a lot easier with a small python script and a local file. I prepared this as a small training project that goes through a lot of elements.
-
-LIMITATIONS: Can display more devices at the same time, but will use the same color.
 ***
 ## Installation - a bit complicated :)
 * Download `/www/trackermap.html` to `<your-hass-configuration-dir>/www/` 
