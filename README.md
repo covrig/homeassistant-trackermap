@@ -96,12 +96,12 @@ data_template: {"event": "DeviceName2", "value1":...
 ```
 * Edit the `trackermap_multipledevices.html` to match names of your devices/events (read the comments in the file):
 ```
-<option value="Mary">Mary</option>
-<option value="John">John</option>
+<option value="Mary">Mary</option>    <-- replace "John" x 2
+<option value="John">John</option>    <-- replace "Mary"x 2
 ```
 ```
-csv = data.filter...row['Device'] === "John" );
-csv2 = data.filter...row['Device'] === "Mary" );
+csv = data.filter...row['Device'] === "John" );   <-- replace "John"
+csv2 = data.filter...row['Device'] === "Mary" );  <-- replace "Mary"
 ```
 * The `trackermap_multipledevices.html` file explains how to add more than 2 devices (in comments).
 * Don't forget about inserting your Google Sheet URL and the API key.
