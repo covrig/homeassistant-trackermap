@@ -1,5 +1,5 @@
 # Tracker map for [Home Assistant](https://home-assistant.io)
-Tracking and mapping one or more devices using Home Assistant, Google Sheets, Google Maps Api, and IFTTT. <br>Similar to [Google Maps Timeline feature](https://www.google.com/maps/timeline).
+Tracking and mapping **one or more** devices using Home Assistant, Google Sheets, Google Maps Api, and IFTTT. <br>Similar to [Google Maps Timeline feature](https://www.google.com/maps/timeline).
 ```diff
 + Displays the history of a Home Assistant device tracker on a Google map. Uses Google Sheets as data storage.
 ```
@@ -90,6 +90,7 @@ function onChange(event) {
 automation1:
 ...
 data_template: {"event": "DeviceName1", "value1":...
+
 automation2:
 ...
 data_template: {"event": "DeviceName2", "value1":...
