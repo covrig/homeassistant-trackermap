@@ -2,7 +2,7 @@
 Tracking and mapping ***one or more*** devices using Home Assistant, Google Sheets, Google Maps Api, and IFTTT. <br>Similar to [Google Maps Timeline feature](https://www.google.com/maps/timeline).
 ```diff
 + Displays the history of a Home Assistant device tracker on a Google map. Uses Google Sheets as data storage.
-- Clear your cache after updating. In the console (F12) you should see a line showing your current version.
+- Clear your cache after updating. In the console (F12) you should see a line with your current version.
 ```
 
 <img align="left" src="https://i.imgur.com/E6yZfuf.png" height="350">
@@ -14,23 +14,23 @@ Tracking and mapping ***one or more*** devices using Home Assistant, Google Shee
 * Polylines: on/off;
 * Heatmap: +/- radius, +/- intensity, opacity, gradient color;
 * Code can be easily customized to add/remove features (e.g. add filter for multiple devices);
-* Can be used as a [*panel iframe*](https://home-assistant.io/components/panel_iframe) or as a [*custom state card iframe*](https://github.com/covrig/homeassistant-iframe-card);
+* Can be used as a [*panel iframe*](https://home-assistant.io/components/panel_iframe), [*custom state card iframe*](https://github.com/covrig/homeassistant-iframe-card) or outside HASS (CORS might be a problem to solve);
 * Disabled more-info card, auto resize/recenter map...
 ***
-KNOWN PROBLEMS: <br>[Browser compatibility issues](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date#Browser_compatibility): the date picker could default to a text picker. <br>I can't show all features in a picture (confidentiality issues). <br> I am aware, that all this could be done a lot easier with a small python script and a local file. I prepared this as a small training project that goes through a lot of elements.
+KNOWN PROBLEMS: <br>[Browser compatibility issues](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date#Browser_compatibility): the date picker could default to a text picker. <br>I can't show all features in a picture (confidentiality issues). <br> I am aware that all this could be done a lot easier with a small python script and a local file. I prepared this as a small training project that goes through a lot of elements.
 ***
 ## Installation - a bit complicated :)
 * Download `/www/trackermap.html` to `<your-hass-configuration-dir>/www/` 
-<br>(create the folder structure if you don't have it - mind the permissions)
+<br>(create the folder structure if you don't have it)
 * Get an API key for Google Maps. Edit the `/www/trackermap.html` file: replace `*YOURAPIKEY*` with your API key.
 <br> [*Get an API key from Google here*](https://developers.google.com/maps/documentation/javascript/get-api-key)
-* Add it to your HASS configuration. There are two posibilities: as a [*panel iframe*](https://home-assistant.io/components/panel_iframe) or as a [*custom state card iframe*](https://github.com/covrig/homeassistant-iframe-card). 
+* Add the html file to your HASS configuration. There are two posibilities: as a [*panel iframe*](https://home-assistant.io/components/panel_iframe) or as a [*custom state card iframe*](https://github.com/covrig/homeassistant-iframe-card). 
 <br>You will find detailed instructions for the iframe state card in the link.<br>
 The URL you need to use should be similar to: **http://yourhostorIP:8123/local/trackermap.html**.
-* If you don't have it already, enable IFTTT in your configuration. All the instructions [**here**](https://home-assistant.io/components/ifttt/).
+* If you didn't already, enable IFTTT in your configuration. All the instructions [**here**](https://home-assistant.io/components/ifttt/).
 * Connect to your IFTTT account the *[Webhooks](https://ifttt.com/maker_webhooks)* and *[Google Sheets](https://ifttt.com/google_sheets)*
-<br>Home Assistant will use Webhooks to send data to a Google sheet via IFTTT. An automation will trigger this.
-* If you want to track more than one device [please consider this in the next steps](https://github.com/covrig/homeassistant-trackermap/blob/master/README.md#tracking-multiple-devices).
+<br>Home Assistant will use Webhooks to send data to a Google Sheet via IFTTT. An automation will trigger this.
+* If you want to track more than one device [please consider this in the following steps](https://github.com/covrig/homeassistant-trackermap/blob/master/README.md#tracking-multiple-devices).
 * Create an applet in IFTTT to transfer the data from HASS to Google Sheets.
 <br>**this** (trigger) should be Webhooks with the event name **LatLong**
 <br> **that** (action service) should be Google Sheets, with the action "Add row to spreadsheet"; you can choose your own spreadsheet name and drive folder path (remember both), however the **formatted row** should be `{{OccurredAt}} ||| {{Value1}} |||{{Value2}} ||| {{Value3}}`
@@ -62,7 +62,7 @@ function onChange(event) {
   sourceSheet.getRange(1, 1, sourceSheet.getLastRow(), sourceSheet.getLastColumn()).clear({contentsOnly: true}); 
 }
 ```
-* Create a trigger for the function above. In the script editor go to `Edit\Current project's trigger`, give the script a name, then click on the link pointing you to create a new trigger. Select the `onChange` function and change from time based (you can also use time) to `From spreadsheet + On Change`.
+* Create a trigger for the function above. In the script editor go to `Edit\Current project's trigger`, give the script a name, then click on the link pointing to create a new trigger. Select the `onChange` function and change from time based (you can also use time) to `From spreadsheet + On Change`.
 * Save evertyhing. You will be asked to authorize your script with your account. Proceed to do that.
 * Replace the first row of the Archive file with the headers below. You can write over the existing data.
   <img src="https://i.imgur.com/qFc3lw5.jpg" width="450">
@@ -82,7 +82,8 @@ function onChange(event) {
 
 ## Tracking multiple devices
 * The steps are more or less the same as above. Use `/www/trackermap_multipledevices.html` instead.
-* The IFTTT **that** section should be updated to: `{{OccurredAt}} ||| {{EventName}} ||| {{Value1}} |||{{Value2}} ||| {{Value3}}`. The difference is the `{{EventName}}`.
+* The URL you need to use should be similar to: **http://yourhostorIP:8123/local/trackermap_multipledevices.html**.
+* The IFTTT **that** - **formatted row**section should be updated to: `{{OccurredAt}} ||| {{EventName}} ||| {{Value1}} |||{{Value2}} ||| {{Value3}}`. The difference is the `{{EventName}}`.
 * The column names of the Google Sheet file should be updated to: `Title\Device\Date\Lat\Long` (`Device` is new).
 * For each tracked device a different HASS automation should be created. Same format as explained above. The difference is in the `data_template`. The `event` parameter should contain the device name.
 ```
@@ -92,7 +93,7 @@ data_template: {"event": "DeviceName1", "value1":...
 automation2:...
 data_template: {"event": "DeviceName2", "value1":...
 ```
-* Edit the `trackermap_multipledevices.html` to match names of your devices/events (read de comments in the file):
+* Edit the `trackermap_multipledevices.html` to match names of your devices/events (read the comments in the file):
 ```
 <option value="Mary">Mary</option>
 <option value="John">John</option>
