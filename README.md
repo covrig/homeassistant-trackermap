@@ -10,7 +10,7 @@ Tracking and mapping ***one or more*** devices using Home Assistant, Google Shee
 
 ## Features
 * Date filters: day, period;
-* One or more devices in the same time;
+* One or more devices in the same time [read here](https://github.com/covrig/homeassistant-trackermap/blob/master/README.md#tracking-multiple-devices);
 * Markers: on/off;
 * Polylines: on/off;
 * Heatmap: +/- radius, +/- intensity, opacity, gradient color;
@@ -33,6 +33,7 @@ The URL you need to use should be similar to: **http://yourhostorIP:8123/local/t
 * If you don't have it already, enable IFTTT in your configuration. All the instructions [**here**](https://home-assistant.io/components/ifttt/).
 * Connect to your IFTTT account the *[Webhooks](https://ifttt.com/maker_webhooks)* and *[Google Sheets](https://ifttt.com/google_sheets)*
 <br>Home Assistant will use Webhooks to send data to a Google sheet via IFTTT. An automation will trigger this.
+* If you want to track more than one device [please consider this in the next steps](https://github.com/covrig/homeassistant-trackermap/blob/master/README.md#tracking-multiple-devices).
 * Create an applet in IFTTT to transfer the data from HASS to Google Sheets.
 <br>**this** (trigger) should be Webhooks with the event name **LatLong**
 <br> **that** (action service) should be Google Sheets, with the action "Add row to spreadsheet"; you can choose your own spreadsheet name and drive folder path (remember both), however the **formatted row** should be `{{OccurredAt}} ||| {{Value1}} |||{{Value2}} ||| {{Value3}}`
@@ -107,7 +108,7 @@ csv = data.filter...row['Device'] === "John" );
 csv2 = data.filter...row['Device'] === "Mary" );
 ```
 * The `trackermap_multipledevices.html` file explains how to add more than 2 devices (in comments).
-<img src="https://i.imgur.com/Arg6nPq.jpg" height="2500">
+<img src="https://i.imgur.com/Arg6nPq.jpg" height="250">
 
 ## Changelog
 ```diff
@@ -118,5 +119,5 @@ Version 20180215:
 Version 20180216:
 +Added "-1D" - go back one day button: every click substracts a day;
 +Enabled layers: sattelite, terrain etc.
-Added trackermap_multipledevices.html
+-Added trackermap_multipledevices.html
 ```
