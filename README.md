@@ -96,8 +96,8 @@ data_template: {"event": "DeviceName2", "value1":...
 ```
 * Edit the `trackermap_multipledevices.html` to match names of your devices/events (read the comments in the file):
 ```
-<option value="Mary">Mary</option>    <-- replace "John" x 2
-<option value="John">John</option>    <-- replace "Mary"x 2
+<option value="Mary">Mary</option>    <-- replace "Mary" x 2
+<option value="John">John</option>    <-- replace "John"x 2
 ```
 ```
 csv = data.filter...row['Device'] === "John" );   <-- replace "John"
