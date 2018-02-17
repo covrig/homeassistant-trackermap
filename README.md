@@ -84,8 +84,6 @@ function onChange(event) {
 ## Tracking multiple devices
 * The steps are more or less the same as above. Use `/www/trackermap_multipledevices.html` instead.
 * The URL you need to use for your iframe should be similar to: **http://yourhostorIP:8123/local/trackermap_multipledevices.html**.
-* The IFTTT **that** - **formatted row**section should be updated to: `{{OccurredAt}} ||| {{EventName}} ||| {{Value1}} |||{{Value2}} ||| {{Value3}}`. The difference is the `{{EventName}}`.
-* The column names of the Google Sheet file should be updated to: `Title\Device\Date\Lat\Long` (`Device` is new).
 * For each tracked device a different HASS automation should be created. Same format as explained above. The difference is in the `data_template`. The `event` parameter should contain the device name.
 ```
 automation1:...
@@ -103,6 +101,9 @@ data_template: {"event": "DeviceName2 e.g.Mary", "value1":...
 csv = data.filter...row['Device'] === "John" );   <-- replace "John"
 csv2 = data.filter...row['Device'] === "Mary" );  <-- replace "Mary"
 ```
+* Create 2 (or more) IFTTT applets feeding to the same Google Sheet.
+* The IFTTT **that** - **formatted row** section should be updated to: `{{OccurredAt}} ||| {{EventName}} ||| {{Value1}} |||{{Value2}} ||| {{Value3}}`. The difference is the `{{EventName}}` - this will differentiate the devices.
+* The column names of the Google Sheet file should be updated to: `Title\Device\Date\Lat\Long` (`Device` is new).
 * The `trackermap_multipledevices.html` file explains how to add more than 2 devices (in comments).
 * Don't forget about inserting your Google Sheet URL and the API key.
 <img src="https://i.imgur.com/Arg6nPq.jpg" height="250">
