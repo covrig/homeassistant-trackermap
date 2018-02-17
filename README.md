@@ -1,5 +1,5 @@
 # Tracker map for [Home Assistant](https://home-assistant.io)
-Tracking and mapping **one or more** devices using Home Assistant, Google Sheets, Google Maps Api, and IFTTT. <br>Similar to [Google Maps Timeline feature](https://www.google.com/maps/timeline).
+Tracking and mapping ***one or more*** devices using Home Assistant, Google Sheets, Google Maps Api, and IFTTT. <br>Similar to [Google Maps Timeline feature](https://www.google.com/maps/timeline).
 ```diff
 + Displays the history of a Home Assistant device tracker on a Google map. Uses Google Sheets as data storage.
 ```
@@ -10,6 +10,7 @@ Tracking and mapping **one or more** devices using Home Assistant, Google Sheets
 
 ## Features
 * Date filters: day, period;
+* One or more devices in the same time;
 * Markers: on/off;
 * Polylines: on/off;
 * Heatmap: +/- radius, +/- intensity, opacity, gradient color;
@@ -106,7 +107,7 @@ csv = data.filter...row['Device'] === "John" );
 csv2 = data.filter...row['Device'] === "Mary" );
 ```
 * The `trackermap_multipledevices.html` file explains how to add more than 2 devices (in comments).
-<img src="https://i.imgur.com/Arg6nPq.jpg" height="350">
+<img src="https://i.imgur.com/Arg6nPq.jpg" height="2500">
 
 ## Changelog
 ```diff
