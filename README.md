@@ -5,7 +5,7 @@ Tracking and mapping ***one or more*** devices using Home Assistant, Google Shee
 - Clear your cache after updating. In the console (F12) you should see a line with your current version.
 ```
 
-<img align="left" src="https://i.imgur.com/E6yZfuf.png" height="350">
+<img align="left" src="https://i.imgur.com/gcqfKqQ.png" height="350">
 
 ## Features
 * Date filters: day, period;
