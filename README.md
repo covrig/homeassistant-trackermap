@@ -87,7 +87,6 @@ function onChange(event) {
 * Use the same steps as before.
 * The IFTTT **that** section should be updated to: `{{OccurredAt}} ||| {{EventName}} ||| {{Value1}} |||{{Value2}} ||| {{Value3}}`. The difference is the `{{EventName}}`.
 * The column names of the Google Sheet file should be updated to: `Title\Device\Date\Lat\Long` (`Device` is new).
-<img align="left" src="https://i.imgur.com/Arg6nPq.jpg" height="250">
 * For each tracked device a different HASS automation should be created. Same format as explained above. The difference is in the `data_template`. The `event` parameter should contain the device name.
 ```
 automation1:
@@ -109,7 +108,7 @@ csv = data.filter...row['Device'] === "John" );
 csv2 = data.filter...row['Device'] === "Mary" );
 ```
 * The `trackermap_multipledevices.html` file explains how to add more than 2 devices (in comments).
-
+<img src="https://i.imgur.com/Arg6nPq.jpg" height="250">
 
 ## Changelog
 ```diff
