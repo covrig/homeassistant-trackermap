@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- v.20180217-->
+<!-- v.20180218-->
 <html>
 <head>
 <meta charset="UTF-8">
@@ -39,6 +39,19 @@
 
     ::-webkit-datetime-edit-day-field {
         color: red;
+    }
+    .button {
+        margin-bottom: 2px;
+    }
+    #dist {
+    color: green;
+    font-size: 0.8em;
+    margin-left: 5px;
+    }
+    #dist2 {
+    color: red;
+    font-size: 0.8em;
+    margin-left: 5px;
     }
 </style>
 <script>
@@ -180,9 +193,17 @@
     var myVar2 = setInterval(today, 100);
 
     function addLatLng(event) {
-
-        var URLMarker = document.getElementById("marker").value
-        //Replace here
+    
+            if (document.getElementById("marker").value == 1) {
+             var URLMarker = 'https://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_green.png';
+             var URLMarker2 = 'https://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png';
+            }          
+            else {
+             var URLMarker = '0';
+             var URLMarker2 = '0';
+            }
+      
+            //Replace here
                 var URL = 'MyGoogleSheetLink';
 
         d3.csv(URL, function(error, data) {
@@ -234,6 +255,12 @@
                 marker.addListener('click', function() {
                     this.infowindow.open(map, this);
                 });
+            var distraw = 0;
+            for (var i = 0; i < poly.getPath().getLength() - 1; i++) {
+               distraw += google.maps.geometry.spherical.computeDistanceBetween(poly.getPath().getAt(i), poly.getPath().getAt(i + 1));
+            }
+            var dist =  (distraw / 1000).toFixed(1)   
+            document.getElementById("dist").innerHTML = dist; 
             });
 /*---------------------------------------------------------------------------- 
   If more options were added in the CSV above, add multiple functions replacing the variables: csv2, poly2, heatmapData2 with the next number.
@@ -250,7 +277,7 @@
                     position: location,
                     map: map,
                     title: d.Title,
-                    icon: URLMarker,
+                    icon: URLMarker2,
                 });
                 bounds.extend(location);
                 map.fitBounds(bounds);
@@ -260,11 +287,19 @@
                 marker.addListener('click', function() {
                     this.infowindow.open(map, this);
                 });
-            });
+            var distraw = 0;
+            for (var i = 0; i < poly2.getPath().getLength() - 1; i++) {
+               distraw += google.maps.geometry.spherical.computeDistanceBetween(poly2.getPath().getAt(i), poly2.getPath().getAt(i + 1));
+            }
+            var dist =  (distraw / 1000).toFixed(1)   
+            document.getElementById("dist2").innerHTML = dist;   
+            });   
 /*---------------------------------------------------------------------------- */
         });
       
         clearInterval(myVar);
+        poly.getPath().clear();
+        poly2.getPath().clear();
     }
     function today() {
         var nd = new Date();
@@ -273,23 +308,25 @@
         document.getElementById('date2').valueAsDate = ndoff;
         clearInterval(myVar2);
         var testdate = document.getElementById('date').value;
-        console.log(testdate  + "v.20180217")
+        console.log(testdate  + "v.20180218")
     }
     function min1() {
         var dd = document.getElementById('date').value;
         var nd = new Date(dd);
+        var mind = new Date();
+        var min = mind.getMinutes();
         nd.setDate(nd.getDate() - 1);
-        var ndoff = new Date (+nd-nd.getTimezoneOffset()*60000);
+        var ndoff = new Date (+nd-nd.getTimezoneOffset()*60000+min*60000);
         document.getElementById('date').valueAsDate = ndoff;
-        document.getElementById('date2').valueAsDate = ndoff;
+        document.getElementById('date2').valueAsDate = ndoff;         
     }
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=YOURAPIKEY&libraries=visualization&callback=initMap">
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=YOURAPIKEY&libraries=visualization,geometry&callback=initMap">
 </script>
 <div id="floating-panel">
     <select id="marker" onChange="initMap(), addLatLng()">
-    <option selected disabled value="https://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png">Markers</option>
-    <option value="https://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png">Yes</option>
+    <option selected disabled value="1">Markers</option>
+    <option value="1">Yes</option>
     <option value="0">No</option>
     </select>
 <!-- ---------------------------------------------------------------------------- 
@@ -302,7 +339,9 @@ The first option is the initial value. You can replace it with a device, however
     <option value="John">John</option>
     </select>
 <!-- ---------------------------------------------------------------------------- -->  
-        <button onclick="toggleHeatmap()">Toggle Heatmap</button></br>
+        <button onclick="toggleHeatmap()" class="button">Toggle Heatmap</button>
+        <span id="dist">xx</span>
+        <span id="dist2">xx</span></br>
         <button onclick="changeupRadius()">▲ Radius</button>
         <button onclick="changedownRadius()">▼ Radius</button>
         <button onclick="changeupInt()">▲ Int</button>
