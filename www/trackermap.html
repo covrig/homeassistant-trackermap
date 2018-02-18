@@ -40,11 +40,14 @@
     ::-webkit-datetime-edit-day-field {
         color: red;
     }
-#dist {
+    #dist {
     color: red;
     font-size: 0.8em;
     margin-left: 5px;
-   }
+    }
+    .button {
+    margin-bottom: 2px;
+    }
 </style>
 <script>
     function initMap() {
@@ -129,8 +132,13 @@
     var myVar2 = setInterval(today, 100);
 
     function addLatLng(event) {
-
-        var URLMarker = document.getElementById("marker").value
+        //Replace here
+            if (document.getElementById("marker").value == 1) {
+             var URLMarker = 'https://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png';
+            }          
+            else {
+             var URLMarker = '0';
+            }
         //Replace here
         var URL = 'MyGoogleSheetLink';
 
@@ -186,8 +194,20 @@
     function min1() {
         var dd = document.getElementById('date').value;
         var nd = new Date(dd);
+        var mind = new Date();
+        var min = mind.getMinutes();
         nd.setDate(nd.getDate() - 1);
-        var ndoff = new Date (+nd-nd.getTimezoneOffset()*60000);
+        var ndoff = new Date (+nd-nd.getTimezoneOffset()*60000+min*60000);
+        document.getElementById('date').valueAsDate = ndoff;
+        document.getElementById('date2').valueAsDate = ndoff;
+    }
+    function plus1() {
+        var dd = document.getElementById('date').value;
+        var nd = new Date(dd);
+        var mind = new Date();
+        var min = mind.getMinutes();
+        nd.setDate(nd.getDate() + 1);
+        var ndoff = new Date (+nd-nd.getTimezoneOffset()*60000+min*60000);
         document.getElementById('date').valueAsDate = ndoff;
         document.getElementById('date2').valueAsDate = ndoff;
     }
@@ -196,11 +216,11 @@
 </script>
 <div id="floating-panel">
     <select id="marker" onChange="initMap(), addLatLng()">
-    <option selected disabled value="https://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png">Markers</option>
-    <option value="https://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png">Yes</option>
+    <option selected disabled value="1">Markers</option>
+    <option value="1">Yes</option>
     <option value="0">No</option>
     </select>
-        <button onclick="toggleHeatmap()">Toggle Heatmap</button>
+        <button onclick="toggleHeatmap() class="button">Toggle Heatmap</button>
         <span id="dist"></span></br>
         <button onclick="changeupRadius()">▲ Radius</button>
         <button onclick="changedownRadius()">▼ Radius</button>
@@ -212,6 +232,7 @@
     <input id="date" type="date" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" title="yyyy-mm-dd" onChange="initMap(), addLatLng()">
     <input id="date2" type="date" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" title="yyyy-mm-dd" onChange="initMap(), addLatLng()">
     <input type="button" value="Today" onClick="today(),initMap(), addLatLng()">
-    <input type="button" value="-1D" onClick="min1(),initMap(), addLatLng()"></div>
+    <input type="button" value="-1D" onClick="min1(),initMap(), addLatLng()">
+    <input type="button" value="+1D" onClick="plus1(),initMap(), addLatLng()"></div>                                                                     
 <div id="map"></div>
 </html>
