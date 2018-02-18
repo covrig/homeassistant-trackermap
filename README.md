@@ -79,7 +79,7 @@ function onChange(event) {
 <br>I am using this to read and filter the CSV file from Google Drive.
 * Download `/www/pin.png` to `<your-hass-configuration-dir>/www/`  if you plan to host the marker picture yourself.
 <br>This will be your marker. [Flaticon](https://www.flaticon.com/) is a great place to get new markers. 
-<br>In the html replace `https://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png` (2 locations) with `pin.png` (or any other name you choose).
+<br>In the html replace  `var URLMarker = https://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png` with `pin.png` (or any other name you choose).
 
 ## Tracking multiple devices
 * The steps are more or less the same as above. Use `/www/trackermap_multipledevices.html` instead.
@@ -101,12 +101,12 @@ data_template: {"event": "DeviceName2 e.g.Mary", "value1":...
 csv = data.filter...row['Device'] === "John" );   <-- replace "John"
 csv2 = data.filter...row['Device'] === "Mary" );  <-- replace "Mary"
 ```
-* Create 2 (or more) IFTTT applets feeding to the same Google Sheet.
+* Create 2 (or more) IFTTT applets feeding to the same Google Sheet (corresponding to the automations above).
 * The IFTTT **that** - **formatted row** section should be updated to: `{{OccurredAt}} ||| {{EventName}} ||| {{Value1}} |||{{Value2}} ||| {{Value3}}`. The difference is the `{{EventName}}` - this will differentiate the devices.
 * The column names of the Google Sheet file should be updated to: `Title\Device\Date\Lat\Long` (`Device` is new).
 * The `trackermap_multipledevices.html` file explains how to add more than 2 devices (in comments).
 * Don't forget about inserting your Google Sheet URL and the API key.
-<img src="https://i.imgur.com/Arg6nPq.jpg" height="250">
+<img src="https://i.imgur.com/BZTiFns.jpg" height="250">
 
 ## Changelog
 ```diff
@@ -117,7 +117,10 @@ Version 20180215:
 Version 20180216:
 +Added "-1D" - go back one day button: every click substracts a day;
 +Enabled layers: sattelite, terrain etc.
-Version 20180217:
-+Added distance traveled.
 -Added trackermap_multipledevices.html
+Version 20180218:
++Added distance traveled.
++Added "+1D" - go forward one day button: every click adds a day;
++Each device can have a different marker;
++Date bug fixes;
 ```
