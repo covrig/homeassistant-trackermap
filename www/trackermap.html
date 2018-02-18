@@ -50,6 +50,8 @@
     }
 </style>
 <script>
+    var markersArray = [];
+    var heatmapData;
     function initMap() {
 
         map = new google.maps.Map(document.getElementById('map'), {
@@ -68,7 +70,7 @@
         });
         poly = new google.maps.Polyline({
             strokeColor: 'red',
-            strokeOpacity: 0.5,
+            //strokeOpacity: 0.5,
             strokeWeight: 2
         });
         poly.setMap(map);
@@ -86,7 +88,7 @@
 
     function toggleHeatmap() {
         heatmap.setMap(heatmap.getMap() ? null : map);
-        poly.setMap(poly.getMap() ? null : map);
+        poly.set('strokeOpacity', poly.get('strokeOpacity') ? null : 0.1);
     } 
 
     function changeupRadius() {
@@ -141,7 +143,9 @@
             }
         //Replace here
         var URL = 'MyGoogleSheetLink';
-
+        
+        if( typeof( heatmapData ) == 'object' ) heatmapData.clear();
+        
         d3.csv(URL, function(error, data) {
             csv = data.filter(function(row) {
                 return (row['Date'] >= document.getElementById("date").value && row['Date'] <= document.getElementById("date2").value);
@@ -162,6 +166,7 @@
                     title: d.Title,
                     icon: URLMarker,
                 });
+                markersArray.push(marker);
                 bounds.extend(location);
                 map.fitBounds(bounds);
                 marker.infowindow = new google.maps.InfoWindow({
@@ -173,7 +178,7 @@
             });
             var distraw = 0;
             for (var i = 0; i < path.getLength() - 1; i++) {
-               distraw += google.maps.geometry.spherical.computeDistanceBetween(path.getAt(i), path.getAt(i + 1));
+                 distraw += google.maps.geometry.spherical.computeDistanceBetween(path.getAt(i), path.getAt(i + 1));
             }
             var dist =  (distraw / 1000).toFixed(1)   
             document.getElementById("dist").innerHTML = "Distance: " + dist + " km";   
@@ -181,6 +186,12 @@
         clearInterval(myVar);
         var path = poly.getPath();
         path.clear();
+        clearMarkers();
+    }
+    function clearMarkers() {
+        for (var i = 0; i < markersArray.length; i++ ) {
+             markersArray[i].setMap(null);
+        }
     }
     function today() {
         var nd = new Date();
@@ -215,7 +226,7 @@
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOURAPIKEY&libraries=visualization,geometry&callback=initMap">
 </script>
 <div id="floating-panel">
-    <select id="marker" onChange="initMap(), addLatLng()">
+    <select id="marker" onChange="addLatLng()">
     <option selected disabled value="1">Markers</option>
     <option value="1">Yes</option>
     <option value="0">No</option>
@@ -229,10 +240,10 @@
         <button onclick="changeGradient()">Color</button>
         <button onclick="changeOpacity()">Opacity</button>
     <br>
-    <input id="date" type="date" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" title="yyyy-mm-dd" onChange="initMap(), addLatLng()">
-    <input id="date2" type="date" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" title="yyyy-mm-dd" onChange="initMap(), addLatLng()">
-    <input type="button" value="Today" onClick="today(),initMap(), addLatLng()">
-    <input type="button" value="-1D" onClick="min1(),initMap(), addLatLng()">
-    <input type="button" value="+1D" onClick="plus1(),initMap(), addLatLng()"></div>                                                                     
+    <input id="date" type="date" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" title="yyyy-mm-dd" onChange="addLatLng()">
+    <input id="date2" type="date" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" title="yyyy-mm-dd" onChange="addLatLng()">
+    <input type="button" value="Today" onClick="today(), addLatLng()">
+    <input type="button" value="-1D" onClick="min1(), addLatLng()">
+    <input type="button" value="+1D" onClick="plus1(), addLatLng()"></div>                                                                     
 <div id="map"></div>
 </html>
