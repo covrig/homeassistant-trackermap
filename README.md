@@ -119,8 +119,9 @@ Version 20180216:
 +Enabled layers: sattelite, terrain etc.
 -Added trackermap_multipledevices.html
 Version 20180218:
++Map will just update now instead of refreshing. 
 +Added distance traveled.
 +Added "+1D" - go forward one day button: every click adds a day;
 +Each device can have a different marker;
-+Date bug fixes;
++Date, heatmap. markers bugs fixes;
 ```
