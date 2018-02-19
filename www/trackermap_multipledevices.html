@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- v.20180218-->
+<!-- v.20180219-->
 <html>
 <head>
 <meta charset="UTF-8">
@@ -194,14 +194,59 @@
     var myVar2 = setInterval(today, 100);
 
     function addLatLng(event) {
-            //Replace here for self hosting. Add multiple URLMarkerX variables if you want more devices.
-            if (document.getElementById("marker").value == 1) {
-             var URLMarker = 'https://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_green.png';
-             var URLMarker2 = 'https://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png';
-            }          
+          //Replace here for self hosting. Add multiple else if for each additional device + add more URLMarkerX, strokeColorX variables if you want more devices.
+               var URLMarker1 = 'https://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_green.png';
+               var URLMarker2 = 'https://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png';
+        
+          //All devices
+            if (document.getElementById("device").value === "All") {           
+              if (document.getElementById("marker").value == 1) {
+               var Marker1 = URLMarker1;
+               var Marker2 = URLMarker2;
+               var strokeColor1 = 'green';
+               var strokeColor2 = 'red'; 
+              }
+              else {
+               var Marker1 = '0';
+               var Marker2 = '0';
+               var strokeColor1 = 'green';
+               var strokeColor2 = 'red'; 
+              }
+            }   
+          //Replace Mary with your device name
+          else if (document.getElementById("device").value === "Mary") {
+              if (document.getElementById("marker").value == 1) {
+               var Marker1 = URLMarker1;
+               var Marker2 = URLMarker1;
+               var strokeColor1 = 'red';
+               var strokeColor2 = strokeColor1; 
+              }
+              else {
+               var Marker1 = '0';
+               var Marker2 = '0';
+               var strokeColor1 = 'red';
+               var strokeColor2 = strokeColor1; 
+              };
+            } 
+          //Replace John with your device name
+            else if (document.getElementById("device").value === "John") {
+              if (document.getElementById("marker").value == 1) {
+               var Marker1 = URLMarker2;
+               var Marker2 = URLMarker2;
+               var strokeColor1 = 'green';
+               var strokeColor2 = strokeColor1; 
+              }
+              else {
+               var Marker1 = '0';
+               var Marker2 = '0';
+               var strokeColor1 = 'green';
+               var strokeColor2 = strokeColor1; 
+              }
+            } 
+          //Leave alone
             else {
-             var URLMarker = '0';
-             var URLMarker2 = '0';
+             var Marker1 = '0';
+             var Marker2 = '0';
             }
       
             //Replace below------------------------------------------------------
@@ -232,7 +277,7 @@
                 return (row['Date'] >= document.getElementById("date").value && row['Date'] <= document.getElementById("date2").value && row['Device'] === document.getElementById("device").value );
             });
           
-            csv2 = csv;
+            csv2 = [];
             document.getElementById("dist").style.display = 'none';
             }
 /*---------------------------------------------------------------------------- */
@@ -245,14 +290,14 @@
                 //For debug uncomment the following line:
                 //console.log(d[0])
                 poly.getPath().push(location);
-                poly.set('strokeColor', "green");
+                poly.set('strokeColor', strokeColor1);
               
                 heatmapData.push(location);
                 var marker = new google.maps.Marker({
                     position: location,
                     map: map,
                     title: d.Title,
-                    icon: URLMarker,
+                    icon: URLMarker1,
                 });
                 markersArray.push(marker);
                 bounds.extend(location);
@@ -278,7 +323,7 @@
 
                 var location = new google.maps.LatLng(d.Lat, d.Long);
                 poly2.getPath().push(location);
-                poly2.set('strokeColor', "red");
+                poly2.set('strokeColor', strokeColor2);
               
                 heatmapData2.push(location);
                 var marker = new google.maps.Marker({
@@ -323,27 +368,21 @@
         document.getElementById('date2').valueAsDate = ndoff;
         clearInterval(myVar2);
         var testdate = document.getElementById('date').value;
-        console.log(testdate  + "v.20180218")
+        console.log(testdate  + " v.20180219")
     }
     function min1() {
         var dd = document.getElementById('date').value;
         var nd = new Date(dd);
-        var mind = new Date();
-        var min = mind.getMinutes();
         nd.setDate(nd.getDate() - 1);
-        var ndoff = new Date (+nd-nd.getTimezoneOffset()*60000+min*60000);
-        document.getElementById('date').valueAsDate = ndoff;
-        document.getElementById('date2').valueAsDate = ndoff;         
+        document.getElementById('date').valueAsDate = nd;
+        document.getElementById('date2').valueAsDate = nd;
     }
     function plus1() {
         var dd = document.getElementById('date').value;
         var nd = new Date(dd);
-        var mind = new Date();
-        var min = mind.getMinutes();
         nd.setDate(nd.getDate() + 1);
-        var ndoff = new Date (+nd-nd.getTimezoneOffset()*60000+min*60000);
-        document.getElementById('date').valueAsDate = ndoff;
-        document.getElementById('date2').valueAsDate = ndoff;         
+        document.getElementById('date').valueAsDate = nd;
+        document.getElementById('date2').valueAsDate = nd;
     }
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOURAPIKEY&libraries=visualization,geometry&callback=initMap">
