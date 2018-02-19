@@ -124,4 +124,7 @@ Version 20180218:
 +Added "+1D" - go forward one day button: every click adds a day;
 +Each device can have a different marker;
 +Date, heatmap. markers bugs fixes;
+Version 20180219:
++Bugs fixes with date.
++For multiple devices: line mantain the same color on change.
 ```
