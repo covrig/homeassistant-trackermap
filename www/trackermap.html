@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- v.20180218-->
+<!-- v.20180219-->
 <html>
 <head>
 <meta charset="UTF-8">
@@ -200,27 +200,21 @@
         document.getElementById('date2').valueAsDate = ndoff;
         clearInterval(myVar2);
         var testdate = document.getElementById('date').value;
-        console.log(testdate  + "v.20180218")
+        console.log(testdate  + " v.20180219")
     }
     function min1() {
         var dd = document.getElementById('date').value;
         var nd = new Date(dd);
-        var mind = new Date();
-        var min = mind.getMinutes();
         nd.setDate(nd.getDate() - 1);
-        var ndoff = new Date (+nd-nd.getTimezoneOffset()*60000+min*60000);
-        document.getElementById('date').valueAsDate = ndoff;
-        document.getElementById('date2').valueAsDate = ndoff;
+        document.getElementById('date').valueAsDate = nd;
+        document.getElementById('date2').valueAsDate = nd;
     }
     function plus1() {
         var dd = document.getElementById('date').value;
         var nd = new Date(dd);
-        var mind = new Date();
-        var min = mind.getMinutes();
         nd.setDate(nd.getDate() + 1);
-        var ndoff = new Date (+nd-nd.getTimezoneOffset()*60000+min*60000);
-        document.getElementById('date').valueAsDate = ndoff;
-        document.getElementById('date2').valueAsDate = ndoff;
+        document.getElementById('date').valueAsDate = nd;
+        document.getElementById('date2').valueAsDate = nd;
     }
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOURAPIKEY&libraries=visualization,geometry&callback=initMap">
