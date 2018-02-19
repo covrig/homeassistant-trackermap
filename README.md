@@ -126,5 +126,5 @@ Version 20180218:
 +Date, heatmap. markers bugs fixes;
 Version 20180219:
 +Bugs fixes with date.
-+For multiple devices: line mantain the same color on change.
++For multiple devices: lines and markers mantain the same color on change.
 ```
