@@ -23,18 +23,18 @@ KNOWN PROBLEMS: <br>[Browser compatibility issues](https://developer.mozilla.org
 ## Installation - a bit complicated :)
 * Download `/www/trackermap.html` to `<your-hass-configuration-dir>/www/` 
 <br>(create the folder structure if you don't have it)
-* Get an API key for Google Maps. Edit the `/www/trackermap.html` file: replace `*YOURAPIKEY*` with your API key.
-<br> [*Get an API key from Google here*](https://developers.google.com/maps/documentation/javascript/get-api-key)
+* [Get an API key for Google Maps](https://developers.google.com/maps/documentation/javascript/get-api-key)
+* Edit the `/www/trackermap.html` file: replace `*YOURAPIKEY*` with your API key.
 * Add the html file to your HASS configuration. There are two posibilities: as a [*panel iframe*](https://home-assistant.io/components/panel_iframe) or as a [*custom state card iframe*](https://github.com/covrig/homeassistant-iframe-card). 
 <br>You will find detailed instructions for the iframe state card in the link.<br>
-The URL you need to use should be similar to: **http://yourhostorIP:8123/local/trackermap.html**.
+* The URL you need to use should be similar to: **http://yourhostorIP:8123/local/trackermap.html**.
 * If you didn't already, enable IFTTT in your configuration. All the instructions [**here**](https://home-assistant.io/components/ifttt/).
-* Connect to your IFTTT account the *[Webhooks](https://ifttt.com/maker_webhooks)* and *[Google Sheets](https://ifttt.com/google_sheets)*
+* Connect to your IFTTT account the *[Webhooks](https://ifttt.com/maker_webhooks)* and *[Google Sheets](https://ifttt.com/google_sheets)* services
 <br>Home Assistant will use Webhooks to send data to a Google Sheet via IFTTT. An automation will trigger this.
-* If you want to track more than one device [please consider this in the following steps](https://github.com/covrig/homeassistant-trackermap/blob/master/README.md#tracking-multiple-devices).
+* If you want to track more than one device [please also consider this on top of the following steps](https://github.com/covrig/homeassistant-trackermap/blob/master/README.md#tracking-multiple-devices).
 * Create an applet in IFTTT to transfer the data from HASS to Google Sheets.
 <br>**this** (trigger) should be Webhooks with the event name **LatLong**
-<br> **that** (action service) should be Google Sheets, with the action "Add row to spreadsheet"; you can choose your own spreadsheet name and drive folder path (remember both), however the **formatted row** should be `{{OccurredAt}} ||| {{Value1}} |||{{Value2}} ||| {{Value3}}`
+<br> **that** (action service) should be Google Sheets, with the action "Add row to spreadsheet"; you can choose your own spreadsheet name and drive folder path (remember both), however the **formatted row** should be `{{OccurredAt}} ||| {{Value1}} ||| {{Value2}} ||| {{Value3}}`
 * Create a new automation in HASS (when the state of your tracked device changes send data to Google sheets via IFTTT). You can enrich the automation as you wish (e.g. don't send data over the night).
 ```yaml
  - alias: Store Location GoogleDrive
@@ -46,7 +46,7 @@ The URL you need to use should be similar to: **http://yourhostorIP:8123/local/t
       data_template: {"event": "LatLong", "value1": "{{now().year}}-{{now().strftime('%m')}}-{{now().strftime('%d')}}", "value2": "{{ states.device_tracker['88888888888'].attributes.latitude }}", "value3": "{{ states.device_tracker['88888888888'].attributes.longitude }}"}
 ```
 * At this point you can restart HASS. If the automation wasn't triggered already, trigger it manually.
-* Check you Google Drive. After triggering the automation you should find your new Google Sheets file in the folder you specified. You can also search it by name (the name you specified in IFTTT). Do not add anything to it. Let's say the name of this sheet is "Source" (proceed to next bullet).
+* Check you Google Drive. After triggering the automation you should find your new Google Sheets file in the folder you specified. You can also search it by name (the name you specified in IFTTT). Do not add anything to it. Let's say the name of this sheet is "Source".
 * For some reason there is a 2000 row/per sheet IFTTT limit (the 2001 data point creates a new sheet). <br>To solve this, create a new Google Sheet file in the same folder (better keep both in the same folder). Let's say the name of this sheet is "Archive".
 * Open the "Source" file and go to `Tools\Script Editor`. Replace everything with the following function that moves the data from "Source" to "Archive" (update the Ids in the function - each sheet Id can be found in the URL e.g. `1ytJkkDIs7alHLcAbDwhnRoul-ltFiof6JvhORxgEdWc`).
 ```javascript
@@ -57,8 +57,7 @@ function onChange(event) {
   
   var sourceSheet = source.getSheetByName('Sheet1');
   var destSheet = archive.getSheetByName('Sheet1');    
-  var sourceData = sourceSheet.getRange('A1:E1').getValues();  
-  
+  var sourceData = sourceSheet.getRange('A1:F1').getValues();    
   destSheet.getRange(destSheet.getLastRow()+1,1,sourceData.length,sourceData[0].length).setValues(sourceData);   
   sourceSheet.getRange(1, 1, sourceSheet.getLastRow(), sourceSheet.getLastColumn()).clear({contentsOnly: true}); 
 }
@@ -67,10 +66,10 @@ function onChange(event) {
 * Save evertyhing. You will be asked to authorize your script with your account. Proceed to do that.
 * Replace the first row of the Archive file with the headers below. You can write over the existing data.
   <img src="https://i.imgur.com/qFc3lw5.jpg" width="450">
-* Something to consider. The *Date* rows should be in the format *2018-02-11* (the order might be different depending on your locale). If you see just a number in the column change its format to match (*[see here how](https://i.imgur.com/d8SpBFf.png)*). To check your date format open the developer console (F12) on the tab the map is running and press the "Today" button on the map.
-* Publish the "Archive" file as CSV: `File/Publish to thw web` -> `Sheet1` -> `CSV`. In the `Published content and & settings` (drop down, same screen) you should have the `Automatically republish when changes are made` checked.
-<br> This will allow Home Assistant to read your file. *Copy the Archive file link.*
-* Paste the link you copied above in your `/www/trackermap.html` file. Replace `MyGoogleSheetLink` with your link.<br>(`var URL = 'MyGoogleSheetLink';`)
+* Something to consider. The *Date* rows should be in the format *2018-02-11* (the order might be different depending on your locale). If you see just a number in the column change its format to match (*[see here how](https://i.imgur.com/d8SpBFf.png)*).
+* Publish the "Archive" file as CSV: `File/Publish to the web` -> `Sheet1` -> `CSV`. In the `Published content and & settings` (drop down, same screen) you should have the `Automatically republish when changes are made` checked.
+<br> This will allow the html to read your data. *Copy the Archive file link.*
+* Paste the link you copied above in your `/www/trackermap.html` file. Update `var URL = 'MyGoogleSheetLink';` with your link.<br>
 * **All done!** It might take a few minutes for HASS to register the points.<br> You might need to clear your browser cache or restart HASS.
 * If the map does not show in the frontend try to paste the html file contents to [JSBIN](http://jsbin.com/?html,output). If it works there your problem is with the HASS configuration.
 
@@ -84,7 +83,7 @@ function onChange(event) {
 ## Tracking multiple devices
 * The steps are more or less the same as above. Use `/www/trackermap_multipledevices.html` instead.
 * The URL you need to use for your iframe should be similar to: **http://yourhostorIP:8123/local/trackermap_multipledevices.html**.
-* For each tracked device a different HASS automation should be created. Same format as explained above. The difference is in the `data_template`. The `event` parameter should contain the device name.
+* For each tracked device a different HASS automation should be created. Same format as explained above. The difference is in the `data_template`. The `event` parameter should be the device name.
 ```
 automation1:...
 data_template: {"event": "DeviceName1 e.g.John", "value1":...
@@ -101,11 +100,15 @@ data_template: {"event": "DeviceName2 e.g.Mary", "value1":...
 csv = data.filter...row['Device'] === "John" );   <-- replace "John"
 csv2 = data.filter...row['Device'] === "Mary" );  <-- replace "Mary"
 ```
+```
+else if (document.getElementById("device").value === "John") {
+else if (document.getElementById("device").value === "Mary") {
+```
 * Create 2 (or more) IFTTT applets feeding to the same Google Sheet (corresponding to the automations above).
-* The IFTTT **that** - **formatted row** section should be updated to: `{{OccurredAt}} ||| {{EventName}} ||| {{Value1}} |||{{Value2}} ||| {{Value3}}`. The difference is the `{{EventName}}` - this will differentiate the devices.
+* The IFTTT **that** - **formatted row** section should be updated to: `{{OccurredAt}} ||| {{EventName}} ||| {{Value1}} ||| {{Value2}} ||| {{Value3}}`. The difference is the `{{EventName}}` - this will differentiate the devices.
 * The column names of the Google Sheet file should be updated to: `Title\Device\Date\Lat\Long` (`Device` is new).
 * The `trackermap_multipledevices.html` file explains how to add more than 2 devices (in comments).
-* Don't forget about inserting your Google Sheet URL and the API key.
+* Don't forget to use your Google Sheet URL and the API key.
 <img src="https://i.imgur.com/BZTiFns.jpg" height="250">
 
 ## Changelog
