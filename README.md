@@ -59,7 +59,7 @@ function onChange(event) {
   var destSheet = archive.getSheetByName('Sheet1');    
   var sourceData = sourceSheet.getRange('A1:F1').getValues();    
   destSheet.getRange(destSheet.getLastRow()+1,1,sourceData.length,sourceData[0].length).setValues(sourceData);   
-  sourceSheet.getRange(1, 1, sourceSheet.getLastRow(), sourceSheet.getLastColumn()).clear({contentsOnly: true}); 
+  sourceSheet.getRange(1, 1, 5, 6).clear({contentsOnly: true}); 
 }
 ```
 * Create a trigger for the function above. In the script editor go to `Edit\Current project's trigger`, give the script a name, then click on the link pointing to create a new trigger. Select the `onChange` function and change from time based (you can also use time) to `From spreadsheet + On Change`.
