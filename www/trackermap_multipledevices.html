@@ -216,8 +216,8 @@
           //Replace Mary with your device name
           else if (document.getElementById("device").value === "Mary") {
               if (document.getElementById("marker").value == 1) {
-               var Marker1 = URLMarker1;
-               var Marker2 = URLMarker1;
+               var Marker1 = URLMarker2;
+               var Marker2 = URLMarker2;
                var strokeColor1 = 'red';
                var strokeColor2 = strokeColor1; 
               }
@@ -231,8 +231,8 @@
           //Replace John with your device name
             else if (document.getElementById("device").value === "John") {
               if (document.getElementById("marker").value == 1) {
-               var Marker1 = URLMarker2;
-               var Marker2 = URLMarker2;
+               var Marker1 = URLMarker1;
+               var Marker2 = URLMarker1;
                var strokeColor1 = 'green';
                var strokeColor2 = strokeColor1; 
               }
@@ -297,7 +297,7 @@
                     position: location,
                     map: map,
                     title: d.Title,
-                    icon: URLMarker1,
+                    icon: Marker1,
                 });
                 markersArray.push(marker);
                 bounds.extend(location);
@@ -330,7 +330,7 @@
                     position: location,
                     map: map,
                     title: d.Title,
-                    icon: URLMarker2,
+                    icon: Marker2,
                 });
                 markersArray.push(marker);
                 bounds.extend(location);
