@@ -57,7 +57,7 @@ function onChange(event) {
   
   var sourceSheet = source.getSheetByName('Sheet1');
   var destSheet = archive.getSheetByName('Sheet1');    
-  var sourceData = sourceSheet.getRange('A1:F1').getValues();    
+  var sourceData = sourceSheet.getRange('A1:F6').getValues();    
   destSheet.getRange(destSheet.getLastRow()+1,1,sourceData.length,sourceData[0].length).setValues(sourceData);   
   sourceSheet.getRange(1, 1, 5, 6).clear({contentsOnly: true}); 
 }
